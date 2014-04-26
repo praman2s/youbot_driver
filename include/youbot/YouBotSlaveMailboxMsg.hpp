@@ -52,9 +52,10 @@
 #ifndef _YOUBOT_SLAVE_MAILBOX_MESSAGE_H
 #define	_YOUBOT_SLAVE_MAILBOX_MESSAGE_H
 
-#include <ethercattype.h>
 #include <string>
 #include <time.h>
+
+#include "soem/ethercattype.h"
 #include "generic/dataobjectlockfree/DataObjectLockFree.hpp"
 
 namespace youbot {

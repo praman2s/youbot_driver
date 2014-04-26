@@ -60,6 +60,7 @@
 #include <iostream>
 #include <boost/thread.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+
 #include "generic/Logger.hpp"
 #include "generic/Units.hpp"
 #include "generic/Time.hpp"
@@ -72,8 +73,8 @@
 #include "youbot/JointLimitMonitor.hpp"
 
 extern "C"{
-#include <ethercattype.h>
-#include <ethercatmain.h>
+#include "soem/ethercattype.h"
+#include "soem/ethercatmain.h"
 }
 
 namespace youbot {

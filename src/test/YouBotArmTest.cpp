@@ -1,4 +1,4 @@
-#include "YouBotArmTest.hpp"
+#include "test/YouBotArmTest.hpp"
 
 using namespace youbot;
 

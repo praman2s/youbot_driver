@@ -49,14 +49,14 @@
  *
  ****************************************************************/
 extern "C" {
-#include "ethercattype.h"
-#include "nicdrv.h"
-#include "ethercatbase.h"
-#include "ethercatmain.h"
-#include "ethercatconfig.h"
-#include "ethercatcoe.h"
-#include "ethercatdc.h"
-#include "ethercatprint.h"
+#include "soem/ethercattype.h"
+#include "soem/nicdrv.h"
+#include "soem/ethercatbase.h"
+#include "soem/ethercatmain.h"
+#include "soem/ethercatconfig.h"
+#include "soem/ethercatcoe.h"
+#include "soem/ethercatdc.h"
+#include "soem/ethercatprint.h"
 }
 #include "youbot/EthercatMasterWithThread.hpp"
 #include "youbot/DataTrace.hpp"

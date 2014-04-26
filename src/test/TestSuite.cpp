@@ -1,9 +1,10 @@
-#include "YouBotBaseTest.hpp"
-#include "YouBotBaseTestWithoutThread.hpp"
-#include "YouBotArmTestWithoutThread.hpp"
-#include "YouBotBaseKinematicsTest.hpp"
-#include "YouBotArmTest.hpp"
-#include "YouBotGripperTest.hpp"
+#include "test/YouBotBaseTest.hpp"
+#include "test/YouBotBaseTestWithoutThread.hpp"
+#include "test/YouBotArmTestWithoutThread.hpp"
+#include "test/YouBotBaseKinematicsTest.hpp"
+#include "test/YouBotArmTest.hpp"
+#include "test/YouBotGripperTest.hpp"
+
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>

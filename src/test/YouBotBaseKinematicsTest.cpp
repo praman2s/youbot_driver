@@ -1,4 +1,4 @@
-#include "YouBotBaseKinematicsTest.hpp"
+#include "test/YouBotBaseKinematicsTest.hpp"
 
 using namespace youbot;
 

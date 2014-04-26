@@ -1,4 +1,4 @@
-#include "YouBotBaseTestWithoutThread.hpp"
+#include "test/YouBotBaseTestWithoutThread.hpp"
 
 using namespace youbot;
 

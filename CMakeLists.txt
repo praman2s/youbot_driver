@@ -7,7 +7,6 @@ find_package(catkin REQUIRED COMPONENTS roscpp)
 catkin_package(
   INCLUDE_DIRS 
     include/
-    include/soem
   LIBRARIES
     soem
     YouBotDriver
@@ -53,9 +52,6 @@ add_subdirectory(src/soem)
 
 INCLUDE_DIRECTORIES(
  ${PROJECT_SOURCE_DIR}/include
- ${PROJECT_SOURCE_DIR}/include/soem
- ${PROJECT_SOURCE_DIR}/include/generic
- ${PROJECT_SOURCE_DIR}/include/test
 )
 
 ########### CppUnit and tests ###########
