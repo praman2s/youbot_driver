@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 
-ADD_EXECUTABLE(displayIpAddress
+add_executable(displayIpAddress
   DisplayIpAddress.cpp
 )
 
 target_link_libraries(displayIpAddress stdc++)
 
-INSTALL(TARGETS displayIpAddress RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+install(TARGETS displayIpAddress RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 

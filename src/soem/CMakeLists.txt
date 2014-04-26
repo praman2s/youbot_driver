@@ -1,8 +1,8 @@
-INCLUDE_DIRECTORIES(
+include_directories(
  ${PROJECT_SOURCE_DIR}/include/soem
 )
 
-ADD_LIBRARY(soem 
+add_library(soem 
 	ethercatbase.c 
   ethercatcoe.c 
   ethercatconfig.c 
@@ -14,7 +14,7 @@ ADD_LIBRARY(soem
   ethercatdc.c
 )
 
-SET(SOEM_HEADERS
+set(SOEM_HEADERS
 	ethercatbase.h
 	ethercatcoe.h
 	ethercatconfig.h
@@ -29,14 +29,14 @@ SET(SOEM_HEADERS
 )
 
 
-MACRO(INSTALL_HEADERS_WITH_DIRECTORY HEADER_LIST)
-  FOREACH(HEADER ${${HEADER_LIST}})
-    STRING(REGEX MATCH "(.*)[/\\]" DIR ${HEADER})
-    INSTALL(FILES ${HEADER} DESTINATION include/youbot/youbot/${DIR})
-  ENDFOREACH(HEADER)
-ENDMACRO(INSTALL_HEADERS_WITH_DIRECTORY)
+macro(INSTALL_HEADERS_WITH_DIRECTORY HEADER_LIST)
+  foreach(HEADER ${${HEADER_LIST}})
+    string(REGEX MATCH "(.*)[/\\]" DIR ${HEADER})
+    install(FILES ${HEADER} DESTINATION include/youbot/youbot/${DIR})
+  endforeach()
+endmacro()
 
 INSTALL_HEADERS_WITH_DIRECTORY(SOEM_HEADERS)
 
-INSTALL(TARGETS soem RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+install(TARGETS soem RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 
