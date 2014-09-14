@@ -106,6 +106,9 @@ class YouBotBase {
     ///@param transversalVelocity is the sideway velocity
     ///@param angularVelocity is the rotational velocity around the center of the YouBot
     void getBaseVelocity(quantity<si::velocity>& longitudinalVelocity, quantity<si::velocity>& transversalVelocity, quantity<si::angular_velocity>& angularVelocity);
+	
+    ///commands the base in cartesien wrench
+    void setBaseWrench(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<si::torque>& torquez);
 
     ///commands the base in cartesien velocities
     ///@param longitudinalVelocity is the forward or backward velocity

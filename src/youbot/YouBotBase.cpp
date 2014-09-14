@@ -214,6 +214,13 @@ void YouBotBase::getBaseVelocity(quantity<si::velocity>& longitudinalVelocity, q
 
   // Bouml preserved body end 00051271
 }
+///commands the base in cartesian wrench
+void YouBotBase::setBaseWrench(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<si::torque>& tz) {
+
+	std::cout <<  "driver interface not implemented \n" << std::endl;
+
+
+}
 
 ///commands the base in cartesien velocities
 ///@param longitudinalVelocity is the forward or backward velocity
