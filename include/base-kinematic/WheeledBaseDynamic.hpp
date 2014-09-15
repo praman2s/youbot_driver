@@ -1,5 +1,5 @@
-#ifndef YOUBOT_FOURSWEDISHWHEELOMNIBASEDynamic_H
-#define YOUBOT_FOURSWEDISHWHEELOMNIBASEDynamic_H
+#ifndef YOUBOT_WHEELEDBASEDynamic_H
+#define YOUBOT_WHEELEDBASEDynamic_H
 
 /****************************************************************
  *
@@ -16,6 +16,7 @@
  * Praveen Ramanujam
  * Supervised by:
  * Prof. Paul G.Ploeger
+ *
  *
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  *
@@ -53,43 +54,22 @@
  ****************************************************************/
 #include <vector>
 #include <string>
-#include "generic/Logger.hpp"
 #include "generic/Units.hpp"
-#include "generic/Exceptions.hpp"
-#include "base-kinematic/WheeledBaseDynamic.hpp" 
-#include "base-kinematic/FourSwedishWheelOmniBaseDynamicConfiguration.hpp"
 namespace youbot {
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Implementation of a base Dynamic with four swedish wheels. The youBot base Dynamic.
+/// abstract class of a base / platform Dynamic
 ///////////////////////////////////////////////////////////////////////////////
-class FourSwedishWheelOmniBaseDynamic : public WheeledBaseDynamic {
+class BaseDynamic {
+};
+///////////////////////////////////////////////////////////////////////////////
+/// abstract class of a wheeled based / platform Dynamic
+///////////////////////////////////////////////////////////////////////////////
+class WheeledBaseDynamic : public BaseDynamic {
   public:
-    FourSwedishWheelOmniBaseDynamic();
+    virtual void cartesianWrenchToWheelTorques(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<torque>& tz, std::vector<quantity<torque> >& wheelTorques) = 0;
 
-    virtual ~FourSwedishWheelOmniBaseDynamic();
-
-    virtual void cartesianWrenchToWheelTorques(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<torque>& tz, std::vector<quantity<torque> >& wheelTorques);
-
-     virtual void wheelTorquesToCartesianWrench(const std::vector<quantity<torque> >& wheelTorques, quantity<si::force>& fx, quantity<si::force>& fy, quantity<torque>&  tz);
-
-    void setConfiguration(const FourSwedishWheelOmniBaseDynamicConfiguration& configuration);
-
-    void getConfiguration(FourSwedishWheelOmniBaseDynamicConfiguration& configuration) const;
-
-
-  private:
-    FourSwedishWheelOmniBaseDynamicConfiguration config;
-
-    std::vector<quantity<plane_angle> > lastWheelPositions;
-
-    bool lastWheelPositionInitialized;
-
-    quantity<si::length> longitudinalPos;
-
-    quantity<si::length> transversalPos;
-
-    quantity<plane_angle> angle;
+    virtual void wheelTorquesToCartesianWrench(const std::vector<quantity<torque> >& wheelTorques, quantity<si::force>& fx, quantity<si::force>& fy, quantity<torque>&  tz) = 0;
 
 };
 

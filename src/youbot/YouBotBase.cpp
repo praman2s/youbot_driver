@@ -217,7 +217,21 @@ void YouBotBase::getBaseVelocity(quantity<si::velocity>& longitudinalVelocity, q
 ///commands the base in cartesian wrench
 void YouBotBase::setBaseWrench(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<si::torque>& tz) {
 
-	std::cout <<  "driver interface not implemented \n" << std::endl;
+	//std::cout <<  "driver interface not implemented \n" << std::endl;
+	std::vector<quantity<torque> > wheelTorques;
+    	JointTorqueSetpoint setTorque;
+	youBotBaseDynamic.cartesianWrenchToWheelTorques(fx, fy, tz, wheelTorques);
+	
+	ethercatMaster.AutomaticSendOn(false);
+    	setTorque.torque = wheelTorques[0];
+    	joints[0].setData(setTorque);
+    	setTorque.torque  = wheelTorques[1];
+   	joints[1].setData(setTorque);
+   	setTorque.torque = wheelTorques[2];
+    	joints[2].setData(setTorque);
+    	setTorque.torque = wheelTorques[3];
+    	joints[3].setData(setTorque);
+   	ethercatMaster.AutomaticSendOn(true);
 
 
 }
@@ -710,6 +724,22 @@ void YouBotBase::initializeKinematic() {
 
 
     youBotBaseKinematic.setConfiguration(kinematicConfig);
+
+
+
+    FourSwedishWheelOmniBaseDynamicConfiguration dynamicConfig;
+
+    //read the kinematics parameter from a config file
+    configfile->readInto(kinematicConfig.rotationRatio, "YouBotKinematic", "RotationRatio");
+    configfile->readInto(kinematicConfig.slideRatio, "YouBotKinematic", "SlideRatio");
+    //double dummy = 0;
+    configfile->readInto(dummy, "YouBotKinematic", "LengthBetweenFrontAndRearWheels_[meter]");
+    dynamicConfig.lengthBetweenFrontAndRearWheels = dummy * meter;
+    configfile->readInto(dummy, "YouBotKinematic", "LengthBetweenFrontWheels_[meter]");
+    dynamicConfig.lengthBetweenFrontWheels = dummy * meter;
+    configfile->readInto(dummy, "YouBotKinematic", "WheelRadius_[meter]");
+    dynamicConfig.wheelRadius = dummy * meter;
+    youBotBaseDynamic.setConfiguration(dynamicConfig); // add a new member function
   // Bouml preserved body end 0004DDF1
 }
 

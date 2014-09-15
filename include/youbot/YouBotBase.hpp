@@ -63,6 +63,8 @@
 #include "youbot/YouBotJointParameter.hpp"
 #include "base-kinematic/FourSwedishWheelOmniBaseKinematic.hpp"
 #include "base-kinematic/FourSwedishWheelOmniBaseKinematicConfiguration.hpp"
+#include "base-kinematic/FourSwedishWheelOmniBaseDynamic.hpp"
+#include "base-kinematic/FourSwedishWheelOmniBaseDynamicConfiguration.hpp"
 #include "youbot/EthercatMaster.hpp"
 #include "youbot/EthercatMasterInterface.hpp"
 #include "youbot/EthercatMasterWithThread.hpp"
@@ -118,6 +120,8 @@ class YouBotBase {
 
     ///This class represents the kinematic of the YouBot 
     FourSwedishWheelOmniBaseKinematic youBotBaseKinematic;
+
+    FourSwedishWheelOmniBaseDynamic youBotBaseDynamic;
 
     ///commands positions or angles to all base joints
     ///all positions will be set at the same time

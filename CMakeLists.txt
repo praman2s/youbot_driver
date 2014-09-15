@@ -91,6 +91,8 @@ set(YOUBOT_DRIVER_SRC
   ${PROJECT_SOURCE_DIR}/src/youbot/JointTrajectoryController.cpp
   ${PROJECT_SOURCE_DIR}/src/base-kinematic/FourSwedishWheelOmniBaseKinematic.cpp
   ${PROJECT_SOURCE_DIR}/src/base-kinematic/FourSwedishWheelOmniBaseKinematicConfiguration.cpp
+  ${PROJECT_SOURCE_DIR}/src/base-kinematic/FourSwedishWheelOmniBaseDynamic.cpp
+  ${PROJECT_SOURCE_DIR}/src/base-kinematic/FourSwedishWheelOmniBaseDynamicConfiguration.cpp
 )
 
 
@@ -119,6 +121,9 @@ set(YOUBOT_DRIVER_HEADERS
   include/base-kinematic/FourSwedishWheelOmniBaseKinematic.hpp
   include/base-kinematic/FourSwedishWheelOmniBaseKinematicConfiguration.hpp
   include/base-kinematic/WheeledBaseKinematic.hpp
+  include/base-kinematic/FourSwedishWheelOmniBaseDynamic.hpp
+  include/base-kinematic/FourSwedishWheelOmniBaseDynamicConfiguration.hpp
+  include/base-kinematic/WheeledBaseDynamic.hpp
   include/generic/Exceptions.hpp
   include/generic/Logger.hpp
   include/generic/Time.hpp
