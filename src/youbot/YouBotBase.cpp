@@ -222,7 +222,7 @@ void YouBotBase::setBaseWrench(const quantity<si::force>& fx, const quantity<si:
     	JointTorqueSetpoint setTorque;
 	youBotBaseDynamic.cartesianWrenchToWheelTorques(fx, fy, tz, wheelTorques);
 	
-	ethercatMaster.AutomaticSendOn(false);
+	/*ethercatMaster.AutomaticSendOn(false);
     	setTorque.torque = wheelTorques[0];
     	joints[0].setData(setTorque);
     	setTorque.torque  = wheelTorques[1];
@@ -231,7 +231,7 @@ void YouBotBase::setBaseWrench(const quantity<si::force>& fx, const quantity<si:
     	joints[2].setData(setTorque);
     	setTorque.torque = wheelTorques[3];
     	joints[3].setData(setTorque);
-   	ethercatMaster.AutomaticSendOn(true);
+   	ethercatMaster.AutomaticSendOn(true);*/
 
 
 }
