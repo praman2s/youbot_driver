@@ -76,6 +76,7 @@ YouBotBase::YouBotBase(const std::string name, const std::string configFilePath)
     this->initializeJoints();
 
     this->initializeKinematic();
+    M = 18*kilogram;
 
   // Bouml preserved body end 00067E71
 }
@@ -214,14 +215,40 @@ void YouBotBase::getBaseVelocity(quantity<si::velocity>& longitudinalVelocity, q
 
   // Bouml preserved body end 00051271
 }
-///commands the base in cartesian wrench
-void YouBotBase::setBaseWrench(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<si::torque>& tz) {
 
-	//std::cout <<  "driver interface not implemented \n" << std::endl;
-	std::vector<quantity<torque> > wheelTorques;
-    	JointTorqueSetpoint setTorque;
-	youBotBaseDynamic.cartesianWrenchToWheelTorques(fx, fy, tz, wheelTorques);
+void YouBotBase::setBaseAcceleration(const  quantity<si::acceleration>& ax, const  quantity<si::acceleration>& ay, quantity<si::angular_acceleration> wz){
+
+	std::vector< quantity<si::force> > f;
 	
+
+        // compute wheel force from robot acceleration
+	//setBaseWrench(fx,fy,tz);
+
+
+
+}
+
+void YouBotBase::getBaseAcceleration(quantity<si::acceleration>& ax, quantity<si::acceleration>& ay, quantity<si::angular_acceleration> wz){
+
+	 std::vector< quantity<si::force> > f;
+	 //std::vector<youbot::JointSensedTorque> data;
+	 f.resize(4);
+         getJointData(data);
+	 //youBotBaseDynamic.WheelTorquestoCartesianAcceleration(ax, ay, wz, data);
+         /*for (unsigned int i=0; i<4, i++)
+		f[i] = data[i] * ;*/
+	
+	 ax = (f[0] + f[1] + f[2] + f[3])/M;
+
+	// compute acceleration from wheel forces
+
+
+}
+
+void YouBotBase::setWheelTorques(const std::vector<quantity<torque> > &wheelTorques){
+
+	
+    	JointTorqueSetpoint setTorque;
 	ethercatMaster.AutomaticSendOn(false);
     	setTorque.torque = wheelTorques[0];
     	joints[0].setData(setTorque);
@@ -234,6 +261,18 @@ void YouBotBase::setBaseWrench(const quantity<si::force>& fx, const quantity<si:
    	ethercatMaster.AutomaticSendOn(true);
 
 
+}
+
+
+///commands the base in cartesian wrench
+void YouBotBase::setBaseWrench(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<si::torque>& tz) {
+
+	//std::cout <<  "driver interface not implemented \n" << std::endl;
+	std::vector<quantity<torque> > wheelTorques;
+    	JointTorqueSetpoint setTorque;
+	youBotBaseDynamic.cartesianWrenchToWheelTorques(fx, fy, tz, wheelTorques);
+	setWheelTorques(wheelTorques);
+	
 }
 
 ///commands the base in cartesien velocities

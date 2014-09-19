@@ -108,7 +108,12 @@ class YouBotBase {
     ///@param transversalVelocity is the sideway velocity
     ///@param angularVelocity is the rotational velocity around the center of the YouBot
     void getBaseVelocity(quantity<si::velocity>& longitudinalVelocity, quantity<si::velocity>& transversalVelocity, quantity<si::angular_velocity>& angularVelocity);
+
+    void setBaseAcceleration(const  quantity<si::acceleration>& ax, const  quantity<si::acceleration>& ay, quantity<si::angular_acceleration> wz);
+
+    void getBaseAcceleration(quantity<si::acceleration>& ax, quantity<si::acceleration>& ay, quantity<si::angular_acceleration> wz);
 	
+    void setWheelTorques(const std::vector<quantity<torque> > &wheelTorques);
     ///commands the base in cartesien wrench
     void setBaseWrench(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<si::torque>& torquez);
 
@@ -185,6 +190,7 @@ class YouBotBase {
 
     int controllerType;
 
+    quantity<si::mass> M ;
     int alternativeControllerType;
 
     EthercatMasterInterface& ethercatMaster;
