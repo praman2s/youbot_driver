@@ -111,7 +111,7 @@ class YouBotBase {
 
     void setBaseAcceleration(const  quantity<si::acceleration>& ax, const  quantity<si::acceleration>& ay, quantity<si::angular_acceleration> wz);
 
-    void getBaseAcceleration(quantity<si::acceleration>& ax, quantity<si::acceleration>& ay, quantity<si::angular_acceleration> wz);
+    void getBaseAcceleration(quantity<si::acceleration>& ax, quantity<si::acceleration>& ay, quantity<si::angular_acceleration> &wz);
 	
     void setWheelTorques(const std::vector<quantity<torque> > &wheelTorques);
     ///commands the base in cartesien wrench

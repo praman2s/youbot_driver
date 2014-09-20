@@ -87,12 +87,17 @@ void FourSwedishWheelOmniBaseDynamic::wheelTorquesToCartesianWrench(const std::v
   // Bouml preserved body end 0004C0F1
 }
 
-void FourSwedishWheelOmniBaseDynamic::WheelTorquestoCartesianAcceleration(quantity<si::acceleration> &ax, quantity<si::acceleration> &ay, quantity<si::angular_acceleration> &az, const std::vector<quantity<torque> >& data ){
+void FourSwedishWheelOmniBaseDynamic::WheelTorquestoCartesianAcceleration(quantity<si::acceleration>& ax, quantity<si::acceleration>& ay, quantity<si::angular_acceleration> &wz, const std::vector< quantity<si::torque> >& senseddata){
 	
-	std::vector<quantity<si::force>> f;
-	//f.resize(4);
-	//for (unsigned int i = 0; i <=3 ; i ++)
-		//f = data[i]/config.wheelRadius.value();
+	std::vector< quantity<si::force> > f;
+	f.resize(4);
+	for (unsigned int i = 0; i < 4 ; i ++){
+		//f[i] = senseddata[i]/config.wheelRadius;
+		f[i] = senseddata[0].value()*newton*meter/config.wheelRadius;
+		
+	}
+	
+       
 	return;
 }
 

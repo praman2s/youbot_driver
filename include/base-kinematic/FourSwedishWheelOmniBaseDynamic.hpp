@@ -73,7 +73,7 @@ class FourSwedishWheelOmniBaseDynamic : public WheeledBaseDynamic {
 
      virtual void wheelTorquesToCartesianWrench(const std::vector<quantity<torque> >& wheelTorques, quantity<si::force>& fx, quantity<si::force>& fy, quantity<torque>&  tz);
 
-    virtual void WheelTorquestoCartesianAcceleration(quantity<si::acceleration> &ax, quantity<si::acceleration> &ay, quantity<si::angular_acceleration> &az, const std::vector<quantity<torque> >& data );
+    virtual void WheelTorquestoCartesianAcceleration(quantity<si::acceleration>& ax, quantity<si::acceleration>& ay, quantity<si::angular_acceleration> &wz, const std::vector< quantity<si::torque> >& senseddata);
 
     void setConfiguration(const FourSwedishWheelOmniBaseDynamicConfiguration& configuration);
 

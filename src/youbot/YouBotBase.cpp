@@ -228,21 +228,20 @@ void YouBotBase::setBaseAcceleration(const  quantity<si::acceleration>& ax, cons
 
 }
 
-void YouBotBase::getBaseAcceleration(quantity<si::acceleration>& ax, quantity<si::acceleration>& ay, quantity<si::angular_acceleration> wz){
+void YouBotBase::getBaseAcceleration(quantity<si::acceleration>& ax, quantity<si::acceleration>& ay, quantity<si::angular_acceleration> &wz){
 
 	 std::vector< quantity<si::force> > f;
-	 //std::vector<youbot::JointSensedTorque> data;
+	 std::vector<youbot::JointSensedTorque> data;
+	 std::vector< quantity<si::torque> > senseddata;
 	 f.resize(4);
          getJointData(data);
-	 //youBotBaseDynamic.WheelTorquestoCartesianAcceleration(ax, ay, wz, data);
-         /*for (unsigned int i=0; i<4, i++)
-		f[i] = data[i] * ;*/
-	
-	 ax = (f[0] + f[1] + f[2] + f[3])/M;
-
-	// compute acceleration from wheel forces
-
-
+	 for (unsigned int i = 0; i <=4; i ++){
+		double T = (double)data[i].torque.value();
+		senseddata[i] = T * newton_meter;
+	}
+		
+	 youBotBaseDynamic.WheelTorquestoCartesianAcceleration(ax, ay, wz, senseddata );
+         
 }
 
 void YouBotBase::setWheelTorques(const std::vector<quantity<torque> > &wheelTorques){
