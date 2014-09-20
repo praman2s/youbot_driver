@@ -220,7 +220,6 @@ void YouBotBase::setBaseAcceleration(const  quantity<si::acceleration>& ax, cons
 
 	std::vector< quantity<si::force> > f;
 	
-
         // compute wheel force from robot acceleration
 	//setBaseWrench(fx,fy,tz);
 
@@ -249,6 +248,8 @@ void YouBotBase::setWheelTorques(const std::vector<quantity<torque> > &wheelTorq
 	
     	JointTorqueSetpoint setTorque;
 	ethercatMaster.AutomaticSendOn(false);
+
+	/*ethercatMaster.AutomaticSendOn(false);
     	setTorque.torque = wheelTorques[0];
     	joints[0].setData(setTorque);
     	setTorque.torque  = wheelTorques[1];
@@ -257,7 +258,7 @@ void YouBotBase::setWheelTorques(const std::vector<quantity<torque> > &wheelTorq
     	joints[2].setData(setTorque);
     	setTorque.torque = wheelTorques[3];
     	joints[3].setData(setTorque);
-   	ethercatMaster.AutomaticSendOn(true);
+   	ethercatMaster.AutomaticSendOn(true);*/
 
 
 }
