@@ -1,6 +1,6 @@
 /****************************************************************
  *
- * Copyright (c) 2011
+ * Copyright (c) 2014
  * All rights reserved.
  *
  * Hochschule Bonn-Rhein-Sieg
@@ -10,9 +10,9 @@
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  *
  * Author:
- * Jan Paulus, Nico Hochgeschwender, Michael Reckhaus, Azamat Shakhimardanov
+ * Praveen Ramanujam
  * Supervised by:
- * Gerhard K. Kraetzschmar
+ * Prof. Paul G.Ploeger
  *
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  *
@@ -52,36 +52,36 @@
 namespace youbot {
 
 FourSwedishWheelOmniBaseDynamicConfiguration::FourSwedishWheelOmniBaseDynamicConfiguration() {
-  // Bouml preserved body begin 0004C271
+ 
     this->rotationRatio = 1;
     this->slideRatio = 1;
-  // Bouml preserved body end 0004C271
+    this->friction = 0.005;
+ 
 }
 
 FourSwedishWheelOmniBaseDynamicConfiguration::~FourSwedishWheelOmniBaseDynamicConfiguration() {
-  // Bouml preserved body begin 0004C2F1
-  // Bouml preserved body end 0004C2F1
+  
 }
 
 FourSwedishWheelOmniBaseDynamicConfiguration::FourSwedishWheelOmniBaseDynamicConfiguration(const FourSwedishWheelOmniBaseDynamicConfiguration & source) {
-  // Bouml preserved body begin 0004C371
+ 
     this->rotationRatio = source.rotationRatio;
     this->slideRatio = source.slideRatio;
     this->lengthBetweenFrontAndRearWheels = source.lengthBetweenFrontAndRearWheels;
     this->lengthBetweenFrontWheels = source.lengthBetweenFrontWheels;
     this->wheelRadius = source.wheelRadius;
-  // Bouml preserved body end 0004C371
+ 
 }
 
 FourSwedishWheelOmniBaseDynamicConfiguration & FourSwedishWheelOmniBaseDynamicConfiguration::operator=(const FourSwedishWheelOmniBaseDynamicConfiguration & source) {
-  // Bouml preserved body begin 0004C3F1
+  
     this->rotationRatio = source.rotationRatio;
     this->slideRatio = source.slideRatio;
     this->lengthBetweenFrontAndRearWheels = source.lengthBetweenFrontAndRearWheels;
     this->lengthBetweenFrontWheels = source.lengthBetweenFrontWheels;
     this->wheelRadius = source.wheelRadius;
     return *this;
-  // Bouml preserved body end 0004C3F1
+  
 }
 
 

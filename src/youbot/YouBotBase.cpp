@@ -218,10 +218,20 @@ void YouBotBase::getBaseVelocity(quantity<si::velocity>& longitudinalVelocity, q
 
 void YouBotBase::setBaseAcceleration(const  quantity<si::acceleration>& ax, const  quantity<si::acceleration>& ay, quantity<si::angular_acceleration> wz){
 
-	std::vector< quantity<si::force> > f;
-	
-        // compute wheel force from robot acceleration
-	//setBaseWrench(fx,fy,tz);
+	std::vector< quantity<si::torque> > wheelTorques;
+	JointTorqueSetpoint setTorque;
+	youBotBaseDynamic.BaseAccelerationtoWheelTorques(ax, ay, wz, wheelTorques);
+       
+	ethercatMaster.AutomaticSendOn(false);
+    	setTorque.torque = wheelTorques[0];
+    	joints[0].setData(setTorque);
+    	setTorque.torque  = wheelTorques[1];
+   	joints[1].setData(setTorque);
+   	setTorque.torque = wheelTorques[2];
+    	joints[2].setData(setTorque);
+    	setTorque.torque = wheelTorques[3];
+    	joints[3].setData(setTorque);
+   	ethercatMaster.AutomaticSendOn(true);
 
 
 
@@ -262,7 +272,21 @@ void YouBotBase::setWheelTorques(const std::vector<quantity<torque> > &wheelTorq
 
 
 }
+void YouBotBase::getBaseWrench(quantity<si::force>& fx,quantity<si::force>& fy) {
 
+	 std::vector<youbot::JointSensedTorque> data;
+	 std::vector< quantity<si::torque> > senseddata;
+	 getJointData(data);
+	 for (unsigned int i = 0; i <=4; i ++){
+		double T = (double)data[i].torque.value();
+		senseddata[i] = T * newton_meter;
+	}
+	youBotBaseDynamic.ComputeBaseForce(fx,fy,senseddata);
+	return;
+	
+
+
+}
 
 ///commands the base in cartesian wrench
 void YouBotBase::setBaseWrench(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<si::torque>& tz) {

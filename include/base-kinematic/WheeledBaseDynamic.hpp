@@ -69,7 +69,13 @@ class WheeledBaseDynamic : public BaseDynamic {
   public:
     virtual void cartesianWrenchToWheelTorques(const quantity<si::force>& fx, const quantity<si::force>& fy, const quantity<torque>& tz, std::vector<quantity<torque> >& wheelTorques) = 0;
 
-    virtual void wheelTorquesToCartesianWrench(const std::vector<quantity<torque> >& wheelTorques, quantity<si::force>& fx, quantity<si::force>& fy, quantity<torque>&  tz) = 0;
+     virtual void wheelTorquesToCartesianWrench(const std::vector<quantity<torque> >& wheelTorques, quantity<si::force>& fx, quantity<si::force>& fy, quantity<torque>&  tz)= 0;
+
+    virtual void WheelTorquestoCartesianAcceleration(quantity<si::acceleration>& ax, quantity<si::acceleration>& ay, quantity<si::angular_acceleration> &wz, const std::vector< quantity<si::torque> >& senseddata)= 0;
+
+    virtual void BaseAccelerationtoWheelTorques( const quantity<si::acceleration>& ax,  const quantity<si::acceleration>& ay,  const quantity<si::angular_acceleration> &wz, std::vector< quantity<si::torque> >& data)= 0;
+
+    virtual void ComputeBaseForce(quantity<si::force> &fx, quantity<si::force> &fy, const std::vector< quantity<si::torque> >& data ) = 0;
 
 };
 

@@ -59,6 +59,11 @@
 #include "generic/Exceptions.hpp"
 namespace youbot {
 
+
+template <typename T> int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 /// Configuration for the base Dynamic with four swedish wheels.
 ///////////////////////////////////////////////////////////////////////////////
@@ -73,6 +78,8 @@ class FourSwedishWheelOmniBaseDynamicConfiguration {
     FourSwedishWheelOmniBaseDynamicConfiguration & operator=(const FourSwedishWheelOmniBaseDynamicConfiguration & source);
 
     quantity<si::length> wheelRadius;
+
+    double friction;
 
     quantity<si::length> lengthBetweenFrontWheels;
 

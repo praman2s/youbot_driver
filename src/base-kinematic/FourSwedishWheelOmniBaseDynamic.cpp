@@ -1,6 +1,6 @@
 /****************************************************************
  *
- * Copyright (c) 2011
+ * Copyright (c) 2014
  * All rights reserved.
  *
  * Hochschule Bonn-Rhein-Sieg
@@ -10,9 +10,9 @@
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  *
  * Author:
- * Jan Paulus, Nico Hochgeschwender, Michael Reckhaus, Azamat Shakhimardanov
+ * Praveen Ramanujam
  * Supervised by:
- * Gerhard K. Kraetzschmar
+ * Prof. Paul G.Ploeger
  *
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  *
@@ -52,16 +52,15 @@
 namespace youbot {
 
 FourSwedishWheelOmniBaseDynamic::FourSwedishWheelOmniBaseDynamic() {
-  // Bouml preserved body begin 000513F1
+  
     this->lastWheelPositionInitialized = false;
-  // Bouml preserved body end 000513F1
+    
+ 
 }
 
 FourSwedishWheelOmniBaseDynamic::~FourSwedishWheelOmniBaseDynamic() {
-  // Bouml preserved body begin 00051471
-  // Bouml preserved body end 00051471
+ 
 }
-
 ///Calculates from the cartesian velocity the individual wheel velocities 
 ///@param longitudinalVelocity is the forward or backward velocity
 ///@param transversalVelocity is the sideway velocity
@@ -72,7 +71,7 @@ void FourSwedishWheelOmniBaseDynamic::cartesianWrenchToWheelTorques(const quanti
     std::cout << "Dynamics yet to be implemented" << std::endl;
     return;
 
-  // Bouml preserved body end 0004C071
+ 
 }
 
 ///Calculates from the wheel velocities the cartesian velocity
@@ -101,16 +100,49 @@ void FourSwedishWheelOmniBaseDynamic::WheelTorquestoCartesianAcceleration(quanti
 	return;
 }
 
+void FourSwedishWheelOmniBaseDynamic::BaseAccelerationtoWheelTorques( const quantity<si::acceleration>& ax,  const quantity<si::acceleration>& ay,  const quantity<si::angular_acceleration> &wz, std::vector< quantity<si::torque> >& data){
+
+	std::vector< quantity<si::force> > f;
+	f.resize(4);
+	if (config.wheelRadius.value() == 0 || config.rotationRatio == 0 || config.slideRatio == 0) {
+      		throw std::out_of_range("The wheelRadius, RotationRatio or the SlideRatio are not allowed to be zero");
+    	}
+	f[0] = 1*newton;
+	f[1] = 1*newton;
+	f[2] = 1*newton;
+	f[3] = 1*newton;
+	for (unsigned int i = 0; i < 4 ; i ++){
+		//f[i] = senseddata[i]/config.wheelRadius;
+		data[i] = (f[i].value()/config.wheelRadius.value())*newton_meter;
+		
+	}
+	return;
+}
+
+void FourSwedishWheelOmniBaseDynamic::ComputeBaseForce(quantity<si::force> &fx, quantity<si::force> &fy, const std::vector< quantity<si::torque> >& data ){
+
+	fx = ((-(data[0].value() - this->config.wheelRadius.value()*sgn(data[0])*this->config.friction) -
+              (data[1].value() - this->config.wheelRadius.value()*sgn(data[1])*this->config.friction) + 
+	      (data[2].value() - this->config.wheelRadius.value()*sgn(data[2])*this->config.friction) + 
+	      (data[3].value() -  this->config.wheelRadius.value()*sgn(data[3])*this->config.friction))/this->config.wheelRadius.value() )* newton;
+
+
+	fy = ((-(data[0].value() - this->config.wheelRadius.value()*sgn(data[0])*this->config.friction) +
+              (data[1].value() - this->config.wheelRadius.value()*sgn(data[1])*this->config.friction) + 
+	      (data[2].value() - this->config.wheelRadius.value()*sgn(data[2])*this->config.friction) - 
+	      (data[3].value() -  this->config.wheelRadius.value()*sgn(data[3])*this->config.friction))/this->config.wheelRadius.value() )* newton;
+	return;
+}
 void FourSwedishWheelOmniBaseDynamic::setConfiguration(const FourSwedishWheelOmniBaseDynamicConfiguration& configuration) {
-  // Bouml preserved body begin 0004C171
+
     this->config = configuration;
-  // Bouml preserved body end 0004C171
+ 
 }
 
 void FourSwedishWheelOmniBaseDynamic::getConfiguration(FourSwedishWheelOmniBaseDynamicConfiguration& configuration) const {
-  // Bouml preserved body begin 0004C1F1
+ 
     configuration = this->config;
-  // Bouml preserved body end 0004C1F1
+  
 }
 
 
