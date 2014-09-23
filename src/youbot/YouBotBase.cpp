@@ -276,12 +276,13 @@ void YouBotBase::getBaseWrench(quantity<si::force>& fx,quantity<si::force>& fy) 
 
 	 std::vector<youbot::JointSensedTorque> data;
 	 std::vector< quantity<si::torque> > senseddata;
+	 senseddata.resize(4);
 	 getJointData(data);
 	 for (unsigned int i = 0; i <4; i ++){
-		double T = (double)data[i].torque.value();
-		senseddata[i] = T * newton_meter;
+		senseddata[i] = data[i].torque.value()*newton_meter;
+		//senseddata[i] = T * newton_meter;
 	}
-	//youBotBaseDynamic.ComputeBaseForce(fx,fy,senseddata);
+	youBotBaseDynamic.ComputeBaseForce(fx,fy,senseddata);
 	return;
 	
 
