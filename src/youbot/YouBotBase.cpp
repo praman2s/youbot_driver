@@ -315,10 +315,10 @@ void YouBotBase::setBaseVelocity(const quantity<si::velocity>& longitudinalVeloc
     if (wheelVelocities.size() < BASEJOINTS)
       throw std::out_of_range("To less wheel velocities");
 
-    JointTorqueSetpoint setVel;
+    JointTorqueSetpoint data;
     ethercatMaster.AutomaticSendOn(false);
-    setVel.torque = 0.5 * newton_meter;
-    joints[0].setData(setVel);
+    data.torque = 0.5 * newton_meter;
+    joints[0].setData(data);
     ethercatMaster.AutomaticSendOn(true);
    /* ethercatMaster.AutomaticSendOn(false);
     setVel.angularVelocity = wheelVelocities[0];
