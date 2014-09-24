@@ -121,14 +121,14 @@ void FourSwedishWheelOmniBaseDynamic::BaseAccelerationtoWheelTorques( const quan
 
 void FourSwedishWheelOmniBaseDynamic::ComputeBaseForce(quantity<si::force> &fx, quantity<si::force> &fy, const std::vector< quantity<si::torque> >& data ){
 
-	fx = ((-(data[0].value() - this->config.wheelRadius.value()*sgn(data[0])*this->config.friction) -
-              (data[1].value() - this->config.wheelRadius.value()*sgn(data[1])*this->config.friction) + 
+	fx = ((-(data[0].value() - this->config.wheelRadius.value()*sgn(data[0])*this->config.friction) +
+              (data[1].value() - this->config.wheelRadius.value()*sgn(data[1])*this->config.friction) -
 	      (data[2].value() - this->config.wheelRadius.value()*sgn(data[2])*this->config.friction) + 
 	      (data[3].value() -  this->config.wheelRadius.value()*sgn(data[3])*this->config.friction))/this->config.wheelRadius.value() )* newton;
 
 
-	fy = ((-(data[0].value() - this->config.wheelRadius.value()*sgn(data[0])*this->config.friction) +
-              (data[1].value() - this->config.wheelRadius.value()*sgn(data[1])*this->config.friction) + 
+	fy = (((data[0].value() - this->config.wheelRadius.value()*sgn(data[0])*this->config.friction) +
+              (data[1].value() - this->config.wheelRadius.value()*sgn(data[1])*this->config.friction) - 
 	      (data[2].value() - this->config.wheelRadius.value()*sgn(data[2])*this->config.friction) - 
 	      (data[3].value() -  this->config.wheelRadius.value()*sgn(data[3])*this->config.friction))/this->config.wheelRadius.value() )* newton;
 	return;
